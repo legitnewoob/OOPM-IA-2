@@ -1,102 +1,94 @@
-import java.text.DecimalFormat;
+//import java.text.DecimalFormat;
 import java.util.Scanner;
+import java.util.*;
 
 
+class Stu_Subjects_Marks {
+    public int id;
+    public String stu_name;
+    public int ITVC_tot;
+    public int OOPM_tot;
+    public int DSM_tot;
+    public int COA_tot;
+    public int Honours_tot;
+    public int DS_tot;
 
+    Stu_Subjects_Marks(int id, String stu_name,int ITVC_tot,int OOPM_tot,int DSM_tot,int COA_tot,int Honours_tot,int DS_tot)
+    {
+        this.id= id;
+        this.stu_name=stu_name;
+        this.ITVC_tot=ITVC_tot;
+        this.DS_tot=DS_tot;
+        this.OOPM_tot=OOPM_tot;
+        this.DSM_tot=DSM_tot;
+        this.COA_tot=COA_tot;
+        this.Honours_tot=Honours_tot;
+    }
+
+    public void displaymarks() {
+       
+        {
+            System.out.println("Student roll no. is: " + id + " " +"and Student name is: " + stu_name+ "");
+            System.out.println("The marks are-");
+            System.out.println("1->"+ITVC_tot+" 2->"+OOPM_tot+" 3->"+DSM_tot+ " 4->"+COA_tot+ " 5->"+Honours_tot+" 6->"+DS_tot );
+            System.out.println();
+        }
+        
+    }
+}
+
+class displayft extends Stu_Subjects_Marks{
+
+    displayft(int id, String stu_name, int ITVC_tot, int OOPM_tot, int DSM_tot, int COA_tot, int Honours_tot, int DS_tot) {
+        super(id, stu_name, ITVC_tot, OOPM_tot, DSM_tot, COA_tot, Honours_tot, DS_tot);
+    }
+    public void displaymarks() {
+
+        {
+            System.out.println("Student roll no. is: " + id + " " +"and Student name is: " + stu_name+ "");
+            System.out.println("The marks are-");
+            System.out.println("1->"+ITVC_tot+" 2->"+OOPM_tot+" 3->"+DSM_tot+ " 4->"+COA_tot+ " 5->"+Honours_tot+" 6->"+DS_tot );
+            System.out.println();
+        }
+
+    }
+}
 
 public class Main {
 
-
-
-
     public static void main(String[] args) {
-        // Total points / total credits
-        // points for a class = grade value * credits
-        // A = 4, B = 3....
+       Scanner s = new Scanner(System.in);
+       Stu_Subjects_Marks[] arr;
+
+       arr= new Stu_Subjects_Marks[2];
 
 
-        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < 2; i++) {
+            System.out.println("Please enter your roll no -");
+            int id= s.nextInt();
+            System.out.println("Please enter your name");
+            String stu_name= s.nextLine();
+            System.out.println("Please enter your marks (ESE+ISE+CA) in the subject ITVC,OOPM,DSM,COA,Honours,DS");
+            int ITVC= s.nextInt();
+            int OOPM= s.nextInt();
+            int DSM= s.nextInt();
+            int COA= s.nextInt();
+            int Honours= s.nextInt();
+            int DS= s.nextInt();
 
-        Integer totalPoints = 0;
-        Integer totalCredits = 0;
+            arr[i]= new Stu_Subjects_Marks(id,stu_name,ITVC,OOPM,DSM,COA,Honours,DS);
 
-        boolean moreClasses = false;
-
-        do {
-
-            Integer credits = 0;
-            boolean validCredits = true;
-            do {
-                validCredits = true;
-
-                System.out.println("Enter number of credits:");
-                String creditsString = scanner.nextLine();
-
-                try {
-                    credits = Integer.parseInt(creditsString);
-                }
-                catch (NumberFormatException nfe){
-                    System.out.println("Please enter a valid integer");
-                    validCredits = false;
-                }
-            }
-            while (!validCredits);
-
-
-
-            boolean validGrade = true;
-
-            Integer gradeValue = 0;
-            String grade = "";
-            do {
-                validGrade = true;
-
-                System.out.println("Enter grade:");
-                grade = scanner.nextLine();
-
-                if (grade.equalsIgnoreCase("A")) {
-                    gradeValue = 4;
-                } else if (grade.equalsIgnoreCase("B")) {
-                    gradeValue = 3;
-                } else if (grade.equalsIgnoreCase("C")) {
-                    gradeValue = 2;
-                } else if (grade.equalsIgnoreCase("D")) {
-                    gradeValue = 1;
-                } else if (grade.equalsIgnoreCase("F")) {
-                    gradeValue = 0;
-                } else {
-                    System.out.println("You didn't enter a valid grade :(");
-                    validGrade = false;
-                }
-            }
-            while (!validGrade);
-
-
-            Integer points = gradeValue * credits;
-
-            totalPoints += points;
-            totalCredits += credits;
-
-            System.out.println("Would you like to enter another class? (Y/N)");
-            String moreClassesString = scanner.nextLine();
-
-            moreClasses = moreClassesString.equalsIgnoreCase("Y");
+            arr[i].displaymarks();
 
         }
-        while (moreClasses);
 
 
-        DecimalFormat df = new DecimalFormat("0.00");
-
-        Double gpa = Double.valueOf(totalPoints) / Double.valueOf(totalCredits);
 
 
-        System.out.println("Credits: " + totalCredits);
-        System.out.println("Points: " + totalPoints);
-        System.out.println("GPA: " + df.format(gpa));
 
 
-        scanner.close();
+
+
     }
 
 }
