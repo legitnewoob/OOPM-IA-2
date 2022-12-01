@@ -1,79 +1,63 @@
-import java.util.*;
+import java.util.Scanner;
+
+import Calculator.Display;
 
 
-class Stu_Subjects_Marks {
-    public int id;
-    public String stu_name;
-    public int ITVC_tot;
-    public int OOPM_tot;
-    public int DSM_tot;
-    public int COA_tot;
-    public int Honours_tot;
-    public int DS_tot;
+class Caller
+{
+    String y= "yes";
+    Scanner sc=new Scanner(System.in);
+    int[] marks =new int[10];
 
-    Stu_Subjects_Marks(int id, String stu_name,int ITVC_tot,int OOPM_tot,int DSM_tot,int COA_tot,int Honours_tot,int DS_tot)
+    public void begin()
     {
-        this.id= id;
-        this.stu_name=stu_name;
-        this.ITVC_tot=ITVC_tot;
-        this.DS_tot=DS_tot;
-        this.OOPM_tot=OOPM_tot;
-        this.DSM_tot=DSM_tot;
-        this.COA_tot=COA_tot;
-        this.Honours_tot=Honours_tot;
-    }
-public void displaymarks() {
 
+        System.out.println("Do you know the subject order?");
+        System.out.println("(Press yes only if you know. Else press any other key)");
+        String c = sc.nextLine();
+        if(c.equalsIgnoreCase(y))
         {
-            System.out.println("Student roll no. is: " + id + " " +"and Student name is: " + stu_name+ "");
-            System.out.println("The marks are-");
-            System.out.println("ITVC->"+ITVC_tot+" OOPM->"+OOPM_tot+" DSM->"+DSM_tot+ " COA->"+COA_tot+ " DS->"+DS_tot+" Honours->"+Honours_tot );
             System.out.println();
+            System.out.println("Please enter the marks in the correct order.");
+            int i;
+            for(i =0; i <marks.length; i++)
+            {
+                int m = sc.nextInt();
+                marks[i]= m;
+            }
+            Display d=new Display(marks);			//Declaring Objects and Overloading
+            d.total();								//Overriding
+            d.disp();
+        }
+        else
+        {
+            Display d=new Display();				//Overloading
+            d.total();
+            d.disp();
         }
 
+        System.out.println("--------------------------------Thank You!!--------------------------------");
+        sc.close();
     }
 }
 
-class calc_gpa extends Main{
-
-
-}
 public class Main {
-    public static void main(String[] args) {
-
-        System.out.println("--------------------------------------------------------------------");
-        System.out.println("WELCOME TO CGPA CALCULATOR");
-        System.out.println("Before getting started we would need few details from you....");
-
-        Scanner s = new Scanner(System.in);
-        Stu_Subjects_Marks[] arr;
-//        String stu_name = "";
-         public void imx
-        {
-
-        }
-
-        arr = new Stu_Subjects_Marks[1];
+    public static void main(String[] args){
 
 
-        for (int i = 0; i < 1; i++) {
+        System.out.println();
+        System.out.println();
+        System.out.println("\t\t\t\t\t\t\t\t--------WELCOME TO CGPA CALCULATOR--------\t\t\t\t\t\t\t\t\t");
+        System.out.println("\t\t\t\t\t\t\t\t---------Here you can calculate your--------\t\t\t\t\t\t\t\t");
+        System.out.println("\t\t\t\t\t\t\t\t--------Semester grade point average--------\t\t\t\t\t\t\t\t");
+        System.out.println("\t\t\t\t\t\t\t\t----------This is for Comps SEM III---------\t\t\t\t\t\t\t\t");
+        System.out.println();
 
-            System.out.print("Please enter your name->");
-            String stu_name = s.nextLine();
-            System.out.print("Please enter your roll no->");
-            int id = s.nextInt();
 
-            System.out.println("Please enter your marks (ESE+ISE+CA) in the subject -> 1.ITVC 2.OOPM 3.DSM 4.COA 5.Honours 6.DS");
-            int ITVC = s.nextInt();
-            int OOPM = s.nextInt();
-            int DSM = s.nextInt();
-            int COA = s.nextInt();
-            int Honours = s.nextInt();
-            int DS = s.nextInt();
+        Caller k = new Caller();
 
-            arr[i] = new Stu_Subjects_Marks(id, stu_name, ITVC, OOPM, DSM, COA, Honours, DS);
+        k.begin();
 
-            arr[i].displaymarks();
-        }
+
     }
 }
